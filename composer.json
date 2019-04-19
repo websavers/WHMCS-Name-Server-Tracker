@@ -1,5 +1,5 @@
 {
-    "name": "whmcs/nameservertracker",
+    "name": "whmcs/name_server_tracker",
     "description": "This module helps you track the usage of name servers on your network",
     "keywords": [
         "whmcs",

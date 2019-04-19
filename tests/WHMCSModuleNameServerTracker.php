@@ -17,7 +17,7 @@
 class WHMCSModuleNameServerTracker extends PHPUnit_Framework_TestCase
 {
     /** @var string $moduleName */
-    protected $moduleName = 'nameservertracker';
+    protected $moduleName = 'name_server_tracker';
 
     /**
      * Asserts the required config options function is defined.

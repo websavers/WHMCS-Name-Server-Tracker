@@ -34,7 +34,7 @@ if (!defined("WHMCS")) {
  *
  * @return array
  */
-function nameservertracker_config(){
+function name_server_tracker_config(){
     return [
         // Display name for your module
         'name' => 'Name Server Tracker',
@@ -47,15 +47,15 @@ function nameservertracker_config(){
         // Version number
         'version' => '1.0',
         'fields' => [
-          /*
             // a text field type allows for single line text input
-            'Text Field Name' => [
-                'FriendlyName' => 'Text Field Name',
+            'nsdomain' => [
+                'FriendlyName' => 'Name Server Domain',
                 'Type' => 'text',
-                'Size' => '25',
-                'Default' => 'Default value',
-                'Description' => 'Description goes here',
+                'Size' => '40',
+                'Default' => '',
+                'Description' => 'Enter the domain you use for all of your name servers without the ns* or dns* prefix.',
             ],
+          /*
             // a password field type allows for masked text input
             'Password Field Name' => [
                 'FriendlyName' => 'Password Field Name',
@@ -117,7 +117,7 @@ function nameservertracker_config(){
  *
  * @return array Optional success/failure message
  */
-function nameservertracker_activate(){
+function name_server_tracker_activate(){
     // Create custom tables and schema required by your module
     try {
         Capsule::schema()
@@ -129,6 +129,7 @@ function nameservertracker_activate(){
                     $table->text('nameserver');
                     $table->text('ip');
                     $table->text('server_hostname');
+                    $table->timestamps(); //created_at, updated_at
                 }
             );
 
@@ -159,7 +160,7 @@ function nameservertracker_activate(){
  *
  * @return array Optional success/failure message
  */
-function nameservertracker_deactivate(){
+function name_server_tracker_deactivate(){
     // Undo any database and schema modifications made by your module here
     /*
     try {
@@ -198,7 +199,7 @@ function nameservertracker_deactivate(){
  *
  * @return void
  */
-function nameservertracker_upgrade($vars){
+function name_server_tracker_upgrade($vars){
     $currentlyInstalledVersion = $vars['version'];
 
     /// Perform SQL schema changes required by the upgrade to version 1.1 of your module
@@ -222,11 +223,11 @@ function nameservertracker_upgrade($vars){
  *
  * This function is optional.
  *
- * @see nameservertracker\Admin\Controller::index()
+ * @see name_server_tracker\Admin\Controller::index()
  *
  * @return string
  */
-function nameservertracker_output($vars){
+function name_server_tracker_output($vars){
     
     // Dispatch and handle request here. What follows is a demonstration of one
     // possible way of handling this using a very basic dispatcher implementation.

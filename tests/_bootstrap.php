@@ -7,4 +7,4 @@ if (!defined('WHMCS')) {
 }
 
 // Include the WHMCS module.
-require_once __DIR__ . '/../modules/addons/nameservertracker/nameservertracker.php';
+require_once __DIR__ . '/../modules/addons/name_server_tracker/name_server_tracker.php';
