@@ -1,0 +1,27 @@
+{
+    "name": "whmcs/nameservertracker",
+    "description": "This module helps you track the usage of name servers on your network",
+    "keywords": [
+        "whmcs",
+        "addon module",
+        "name server",
+        "nameservers",
+        "dns",
+    ],
+    "homepage": "https://websavers.ca",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Websavers Inc. Development Team",
+            "email": "dev@websavers.ca",
+            "homepage": "https://websavers.ca",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "help@websavers.ca",
+    },
+    "require-dev": {
+        "phpunit/phpunit": "@stable"
+    }
+}
