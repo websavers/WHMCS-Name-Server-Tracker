@@ -25,11 +25,11 @@ class Controller {
         if ($_REQUEST['success'] == 1){
           $successbox = '<div class="successbox"><strong><span class="title">Changes Saved Successfully!</span></strong><br>Your changes have been saved.</div>';
         }
-        
+    
         $shared_servers = Capsule::table('tblservers')
           ->select('id', 'hostname', 'ipaddress', 'nameserver1', 'nameserver2', 'nameserver3', 'nameserver4', 'nameserver5', 'nameserver1ip', 'nameserver2ip', 'nameserver3ip', 'nameserver4ip', 'nameserver5ip')
           ->whereNotNull('nameserver1')
-          ->get();
+          ->get()->toArray();
         $dedicated_and_vps = Capsule::table('tblhosting')
           ->leftjoin('tblproducts', 'tblhosting.packageid', '=', 'tblproducts.id')
           ->leftjoin('tblclients', 'tblhosting.userid', '=', 'tblclients.id')
@@ -37,15 +37,15 @@ class Controller {
           ->whereNotNull('tblhosting.ns1')
           ->where('tblproducts.type', 'server')
           ->where('tblhosting.domainstatus', '=', 'Active')
-          ->where('tblhosting.ns1', '!=', 'ns1') /* Old default */
-          ->where('tblhosting.ns1', '!=', 'none') /* Old default */
+          ->where('tblhosting.ns1', '!=', 'ns1') // old default
+          ->where('tblhosting.ns1', '!=', 'none') // old default
           ->where('tblhosting.ns1', 'LIKE', "%{$vars[nsdomain]}")
-          ->get();
-        
+          ->get()->toArray();
+
         $nst_manual_entries = Capsule::table('mod_name_server_tracker')
           ->select('id', 'nameserver as nameserver1', 'ip as ipaddress', 'server_hostname as hostname', 'created_at as customentry')
-          ->get();
-        
+          ->get()->toArray();
+
         $all_nameservers = array_merge($shared_servers, $dedicated_and_vps, $nst_manual_entries);
         
         //sort($all_nameservers, SORT_NUMERIC); //proper sorting.
@@ -60,7 +60,7 @@ class Controller {
         });
         
         $nst_table_data = '';
-
+        
         if (empty($all_nameservers)) $nst_table_data = "<tr class='none'><td colspan='9'>No Records Found</td></tr>";
         else{
           foreach ($all_nameservers as $entry){
