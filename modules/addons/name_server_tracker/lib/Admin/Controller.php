@@ -39,7 +39,7 @@ class Controller {
           ->where('tblhosting.domainstatus', '=', 'Active')
           ->where('tblhosting.ns1', '!=', 'ns1') // old default
           ->where('tblhosting.ns1', '!=', 'none') // old default
-          ->where('tblhosting.ns1', 'LIKE', "%{$vars[nsdomain]}")
+          ->where('tblhosting.ns1', 'LIKE', "%{$vars['nsdomain']}")
           ->get()->toArray();
 
         $nst_manual_entries = Capsule::table('mod_name_server_tracker')
@@ -67,14 +67,14 @@ class Controller {
             $nst_table_data .= "<tr>";
             
             if ($entry->userid){
-              $itemurl = "{$GLOBALS[CONFIG][SystemURL]}/admin/clientsservices.php?userid={$entry->userid}&id={$entry->id}";
+              $itemurl = "{$GLOBALS['CONFIG']['SystemURL']}/admin/clientsservices.php?userid={$entry->userid}&id={$entry->id}";
             }
             else{
-              $itemurl = "{$GLOBALS[CONFIG][SystemURL]}/admin/configservers.php?action=manage&id={$entry->id}";
+              $itemurl = "{$GLOBALS['CONFIG']['SystemURL']}/admin/configservers.php?action=manage&id={$entry->id}";
             }
             
             if ($entry->firstname){
-              $clientinfo = "<a href='{$GLOBALS[CONFIG][SystemURL]}/admin/clientssummary.php?userid={$entry->userid}'>{$entry->firstname} {$entry->lastname}</a>";
+              $clientinfo = "<a href='{$GLOBALS['CONFIG']['SystemURL']}/admin/clientssummary.php?userid={$entry->userid}'>{$entry->firstname} {$entry->lastname}</a>";
             }
             else{
               if ($entry->customentry){
@@ -86,7 +86,7 @@ class Controller {
                 $deleteaction = "";
               }
               if (!$entry->companyname){
-                $entry->companyname = "<em>{$GLOBALS[CONFIG][CompanyName]}</em>";
+                $entry->companyname = "<em>{$GLOBALS['CONFIG']['CompanyName']}</em>";
               }
             }
             
@@ -143,9 +143,9 @@ $successbox
   <h2>Add Custom Entry</h2>
   <p><em>Be sure to only add custom entries in cases where you will definitely not be adding the server as a server in WHMCS or to a customer's account. In both of those cases, the server will show here automatically.</em></p>
 
-  <form method="post" id="add-edit-entry" action="{$GLOBALS[CONFIG][SystemURL]}/admin/$modulelink" data-no-clear="false">
+  <form method="post" id="add-edit-entry" action="{$GLOBALS['CONFIG']['SystemURL']}/admin/$modulelink" data-no-clear="false">
     <input type="hidden" name="action" value="create">
-    <input type="hidden" name="token" value="{$GLOBALS[CONFIG][Token]}">
+    <input type="hidden" name="token" value="{$GLOBALS['CONFIG']['Token']}">
 
     <table class="form" width="100%" cellspacing="2" cellpadding="3" border="0">
     <tbody>
@@ -194,7 +194,7 @@ EOF;
         throw new Exception( 'There was an error inserting to the database.' );
       }
       else{
-        header("Location: {$GLOBALS[CONFIG][SystemURL]}/admin/{$vars[modulelink]}&success=1");
+        header("Location: {$GLOBALS['CONFIG']['SystemURL']}/admin/{$vars[modulelink]}&success=1");
       }
       
     }
@@ -216,7 +216,7 @@ EOF;
         throw new Exception("There was an error deleting ID {$_REQUEST[deleteid]}.");
       }
       else{
-        header("Location: {$GLOBALS[CONFIG][SystemURL]}/admin/{$vars[modulelink]}&success=1");
+        header("Location: {$GLOBALS['CONFIG']['SystemURL']}/admin/{$vars[modulelink]}&success=1");
       }
       
     }
