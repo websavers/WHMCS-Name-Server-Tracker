@@ -194,7 +194,7 @@ EOF;
         throw new Exception( 'There was an error inserting to the database.' );
       }
       else{
-        header("Location: {$GLOBALS['CONFIG']['SystemURL']}/admin/{$vars[modulelink]}&success=1");
+        header("Location: {$GLOBALS['CONFIG']['SystemURL']}/admin/{$vars['modulelink']}&success=1");
       }
       
     }
